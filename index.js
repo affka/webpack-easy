@@ -71,7 +71,7 @@ class WebpackEasy {
             !this.isProduction() && new webpack.HotModuleReplacementPlugin()
         ];
 
-        setTimeout(this._run.bind(this));
+        this._isRun = false;
     }
 
     /**
@@ -106,6 +106,8 @@ class WebpackEasy {
                 })
             );
         });
+
+        this._lazyRun();
 
         return this;
     }
@@ -266,7 +268,16 @@ class WebpackEasy {
         });
     }
 
+    _lazyRun() {
+        setTimeout(this._run.bind(this));
+    }
+
     _run() {
+        if (this._isRun) {
+            return;
+        }
+        this._isRun = true;
+
         Promise.all(this._promises).then(() => {
             // Webpack config
             let config = {
