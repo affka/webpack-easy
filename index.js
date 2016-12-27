@@ -26,7 +26,7 @@ class WebpackEasy {
             js: {
                 test: /\.jsx?$/,
                 loaders: {
-                    'react-hot': 'react-hot',
+                    'react-hot': 'react-hot-loader/webpack',
                     babel: 'babel?' + JSON.stringify({
                         cacheDirectory: true,
                         plugins: this.isProduction() ? ['babel-plugin-transform-runtime'] : '',
