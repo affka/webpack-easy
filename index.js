@@ -227,7 +227,7 @@ class WebpackEasy {
      */
     isProduction() {
         if (this._isProduction === null) {
-            this._isProduction = process.argv.splice(2).filter(a => a.match(/(--)?production/) !== null).length > 0;
+            this._isProduction = process.argv.slice(2).filter(a => a.match(/(--)?production/) !== null).length > 0;
         }
         return this._isProduction;
     }
