@@ -49,7 +49,7 @@ class WebpackEasy {
                 loaders: ['style', 'css', 'less']
             },
             font: {
-                test: /\/fonts\/.*\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+                test: /(\/|\\)fonts(\/|\\).*\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
                 loader: 'file-loader',
                 query: {
                     name: 'fonts/[name].[ext]'
