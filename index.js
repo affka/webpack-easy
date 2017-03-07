@@ -229,7 +229,7 @@ class WebpackEasyManager {
                         if (err) {
                             throw new Error(err);
                         }
-                        console.error(stats.compilation.errors.map(e => String(e)).join('\n'));
+                        stats.stats.map(stat => console.error(stats.compilation.errors.map(e => String(e)).join('\n')));
                     });
                 } else {
                     // Configuration for dev server
