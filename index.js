@@ -21,12 +21,16 @@ class WebpackEasyManager {
     }
 
     /**
-     * @param {object} value
+     * @param {object} [value]
      * @returns {WebpackEasy}
      */
     createConfig(value) {
         const config = new WebpackEasy(this);
-        config.config(value);
+        if (value) {
+            config.config(value);
+        }
+        this._configs.push(config);
+        this._lazyRun();
         return config;
     }
 
@@ -111,7 +115,8 @@ class WebpackEasyManager {
      * @returns {WebpackEasyManager}
      */
     entry(source, destination = 'index') {
-        return this._getFirstConfig().entry(...arguments);
+        this._getFirstConfig().entry(...arguments);
+        return this;
     }
 
     /**
@@ -120,7 +125,8 @@ class WebpackEasyManager {
      * @returns {WebpackEasyManager}
      */
     output(rootPath, publicPath) {
-        return this._getFirstConfig().output(...arguments);
+        this._getFirstConfig().output(...arguments);
+        return this;
     }
 
     /**
@@ -128,7 +134,8 @@ class WebpackEasyManager {
      * @returns {WebpackEasyManager}
      */
     plugin(value) {
-        return this._getFirstConfig().plugin(...arguments);
+        this._getFirstConfig().plugin(...arguments);
+        return this;
     }
 
     /**
@@ -136,7 +143,8 @@ class WebpackEasyManager {
      * @returns {WebpackEasyManager}
      */
     config(value) {
-        return this._getFirstConfig().config(...arguments);
+        this._getFirstConfig().config(...arguments);
+        return this;
     }
 
     /**
@@ -145,7 +153,8 @@ class WebpackEasyManager {
      * @returns {WebpackEasyManager}
      */
     loader(value, prepend = false) {
-        return this._getFirstConfig().loader(...arguments);
+        this._getFirstConfig().loader(...arguments);
+        return this;
     }
 
     /**
@@ -153,7 +162,8 @@ class WebpackEasyManager {
      * @returns {WebpackEasyManager}
      */
     loaderJs(value) {
-        return this._getFirstConfig().loaderJs(...arguments);
+        this._getFirstConfig().loaderJs(...arguments);
+        return this;
     }
 
     /**
@@ -161,7 +171,8 @@ class WebpackEasyManager {
      * @returns {WebpackEasyManager}
      */
     loaderEslint(value) {
-        return this._getFirstConfig().loaderEslint(...arguments);
+        this._getFirstConfig().loaderEslint(...arguments);
+        return this;
     }
 
     /**
@@ -169,7 +180,8 @@ class WebpackEasyManager {
      * @returns {WebpackEasyManager}
      */
     loaderJson(value) {
-        return this._getFirstConfig().loaderJson(...arguments);
+        this._getFirstConfig().loaderJson(...arguments);
+        return this;
     }
 
     /**
@@ -177,7 +189,8 @@ class WebpackEasyManager {
      * @returns {WebpackEasyManager}
      */
     loaderLess(value) {
-        return this._getFirstConfig().loaderLess(...arguments);
+        this._getFirstConfig().loaderLess(...arguments);
+        return this;
     }
 
     /**
@@ -185,15 +198,15 @@ class WebpackEasyManager {
      * @returns {WebpackEasyManager}
      */
     loaderFont() {
-        return this._getFirstConfig().loaderFont(...arguments);
+        this._getFirstConfig().loaderFont(...arguments);
+        return this;
     }
 
     _getFirstConfig() {
         if (this._configs.length === 0) {
-            this._configs.push(new WebpackEasy(this));
+            this.createConfig();
         }
 
-        this._lazyRun();
         return this._configs[0];
     }
 
