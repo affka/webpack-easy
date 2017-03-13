@@ -225,11 +225,11 @@ class WebpackEasyManager {
             .then(configs => {
                 if (this.isProduction()) {
                     // Run build
-                    webpack(configs, (err, stats) => {
+                    webpack(configs, (err, multiStats) => {
                         if (err) {
                             throw new Error(err);
                         }
-                        stats.stats.map(stat => console.error(stats.compilation.errors.map(e => String(e)).join('\n')));
+                        multiStats.stats.map(stat => console.error(stat.compilation.errors.map(e => String(e)).join('\n')));
                     });
                 } else {
                     // Configuration for dev server
