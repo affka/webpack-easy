@@ -324,7 +324,8 @@ class WebpackEasy {
             this._manager.isProduction() && new webpack.optimize.UglifyJsPlugin({
                 compress: {
                     warnings: false
-                }
+                },
+                sourceMap: false,
             }),
             !this._manager.isProduction() && new webpack.HotModuleReplacementPlugin()
         ];
@@ -471,7 +472,7 @@ class WebpackEasy {
                         this._output.publicPath :
                     'http://localhost:' + this._manager.getPort() + this._output.publicPath,
                 }),
-                devtool: this._manager.isProduction() ? 'sourcemap' : 'eval',
+                devtool: this._manager.isProduction() ? 'hidden-sourcemap' : 'eval',
                 module: {
                     loaders: this._loadersNames.map(v => this._loaders[v]).filter(v => v).map(loader => {
                         if (_.isObject(loader.loaders)) {
