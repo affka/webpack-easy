@@ -293,11 +293,6 @@ class WebpackEasy {
                 },
                 exclude: /node_modules/
             },
-            eslint: {
-                test: /\.jsx?$/,
-                loader: 'eslint',
-                exclude: /node_modules/,
-            },
             json: {
                 test: /\.json$/,
                 loader: 'json'
@@ -314,6 +309,13 @@ class WebpackEasy {
                 }
             }
         };
+        if (!this._manager.isProduction()) {
+            this._loaders.eslint = {
+                test: /\.jsx?$/,
+                loader: 'eslint',
+                exclude: /node_modules/,
+            };
+        }
         this._loadersNames = Object.keys(this._loaders);
         this._plugins = [
             this._manager.isProduction() && new webpack.DefinePlugin({
@@ -505,7 +507,7 @@ class WebpackEasy {
     }
 
     _loader(name, value, prepend) {
-        this._loaders[name] = value ? _.merge(this._loaders[name] || {}, value) : false;
+        this._loaders[name] = value ? _.extend(this._loaders[name] || {}, value) : false;
         if (prepend) {
             this._loadersNames.unshift(name);
         } else {
