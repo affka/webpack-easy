@@ -507,7 +507,7 @@ class WebpackEasy {
     }
 
     _loader(name, value, prepend) {
-        if (this._loaders[name]) {
+        if (!this._loaders[name]) {
             if (prepend) {
                 this._loadersNames.unshift(name);
             } else {
