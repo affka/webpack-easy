@@ -507,12 +507,14 @@ class WebpackEasy {
     }
 
     _loader(name, value, prepend) {
-        this._loaders[name] = value ? _.extend(this._loaders[name] || {}, value) : false;
-        if (prepend) {
-            this._loadersNames.unshift(name);
-        } else {
-            this._loadersNames.push(name);
+        if (this._loaders[name]) {
+            if (prepend) {
+                this._loadersNames.unshift(name);
+            } else {
+                this._loadersNames.push(name);
+            }
         }
+        this._loaders[name] = value ? _.extend(this._loaders[name] || {}, value) : false;
         return this;
     }
 

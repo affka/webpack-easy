@@ -1,6 +1,6 @@
 {
   "name": "webpack-easy",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Package for simplify and fast configure webpack",
   "main": "index.js",
   "author": "Vladimir Kozhin <affka@affka.ru>",
