@@ -287,7 +287,10 @@ class WebpackEasy {
                     'react-hot': 'react-hot-loader/webpack',
                     babel: 'babel?' + JSON.stringify({
                         cacheDirectory: true,
-                        plugins: this._manager.isProduction() ? ['babel-plugin-transform-runtime'] : '',
+                        plugins: [
+                            'babel-plugin-transform-decorators-legacy',
+                            this._manager.isProduction() && 'babel-plugin-transform-runtime',
+                        ].filter(Boolean),
                         presets: ['es2015', 'stage-1', 'react']
                     })
                 },
